@@ -1,0 +1,4 @@
+*main.py*
+*.csv*
+*.idea*
+*__pycache__*

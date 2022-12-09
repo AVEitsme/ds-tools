@@ -1,3 +1,6 @@
+# Examples
+## Objective class example
+```python
 class Objective:
     def __init__(self, x: pd.DataFrame | pd.Series, y: pd.Series):
         self.x = x
@@ -15,3 +18,11 @@ class Objective:
         cross_valid_scores = cross_val_score(model, self.x, self.y, cv=5, scoring="f1")
 
         return cross_valid_scores.mean()
+```
+## Run
+```python
+objective = Objective(predictors, target)
+
+optimizer = OptunaMaximizer(objective, "MyStudy")
+best_trial = optimizer.optimize(20, 5)
+```

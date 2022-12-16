@@ -30,12 +30,3 @@ class PSI:
         return ((actual_percentage - expected_percentage) * np.log(actual_percentage / expected_percentage)).sum()
 
 
-test_df = pd.read_csv("/home/aveitsme/Projects/ds-tools/psi/test.csv")
-t_df, s_df, _, _ = train_test_split(
-    test_df.loc[:, test_df.columns != "Transported"],
-    test_df["Transported"],
-    test_size=.5,
-    shuffle=True
-)
-# s_df += np.random.normal(1, .1, s_df.shape)
-print(PSI(t_df, s_df, 10).psi_sum())

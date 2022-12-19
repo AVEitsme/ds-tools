@@ -32,13 +32,15 @@ class PSI:
     @staticmethod
     def psi(initial: np.ndarray, new: np.ndarray, bin_counts: int, epsilon: float) -> float:
         """Eval PSI for single feature."""
+        initial.sort()
+        new.sort()
         bins = scale_range(
             source=np.arange(0, bin_counts + 1, dtype=float),
             _min=initial.min(),
             _max=initial.max()
         )
-
-        initial_percentage = np.array(np.histogram(initial, bins)[0]) / len(initial) + epsilon
-        new_percentage = np.array(np.histogram(new, bins)[0]) / len(new) + epsilon
+        initial_percentage = np.array(np.histogram(initial, bins)[0]) / len(initial)
+        new_percentage = np.array(np.histogram(new, bins)[0]) / len(new)
+        initial_percentage[initial_percentage == 0] = epsilon
+        new_percentage[new_percentage == 0] = epsilon
         return ((initial_percentage - new_percentage) * np.log(initial_percentage / new_percentage)).sum()
-

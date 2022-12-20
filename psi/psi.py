@@ -32,7 +32,7 @@ class PSI:
 
     @staticmethod
     def psi(initial: np.ndarray, new: np.ndarray, bin_counts: int, epsilon: float) -> float:
-        """Eval PSI for single feature."""
+        """Eval PSI for a single feature."""
         initial.sort()
         new.sort()
         bins = scale_range(
